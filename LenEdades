@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+
+namespace Len
+{
+    internal class Program
+    {
+        public class Personas
+        {
+            public string nombre { get; set; }
+            public int edad { get; set; }
+
+            public Personas(string nombre, int edad)
+            {
+                this.nombre = nombre;
+                this.edad = edad;
+            }
+        }
+        static void Main(string[] args)
+        {
+            int cantidadPersona = LeerNumero("Cuantas personas vas a contabilizar: ");
+
+            Proceso(cantidadPersona);
+
+            Console.WriteLine("\nPresiona cualquier tecla para salir...");
+            Console.ReadKey();
+        }
+
+        public static int LeerNumero(string error)
+        {
+            int resultado;
+            while (true)
+            {
+                string entrada = Console.ReadLine();
+                if (int.TryParse(entrada, out resultado) && resultado > 0)
+                {
+                    return resultado;
+                }
+                Console.WriteLine("Ingrese un valor valido");
+            }
+        }
+
+        public static void Proceso(int cantidadPersona)
+        {
+            if (cantidadPersona == 1)
+            {
+                UnaPersona();
+            }
+            else
+            {
+                MasPersonas(cantidadPersona);
+            }
+        }
+
+        public static void UnaPersona()
+        {
+            int edadPersona = LeerNumero("Ingresa la edad de la persona: ");
+            Console.Write("Ingresa el nombre de la persona: ");
+            string nombrePersona = Console.ReadLine();
+            if (edadPersona >= 18)
+            {
+                Console.WriteLine($"\nTu persona es:\n{nombrePersona} de {edadPersona} años, es mayor de edad");
+            }
+            else
+            {
+                Console.WriteLine($"\nTu persona es:\n{nombrePersona} de {edadPersona} años, es menor de edad");
+            }
+        }
+
+        public static void MasPersonas(int cantidadPersona)
+        {
+            string nombrePersona;
+            List<Personas> mayores = new List<Personas>();
+            List<Personas> menores = new List<Personas>();
+
+
+
+            for (int i = 0; i < cantidadPersona; i++)
+            {
+                int edad = LeerNumero("Ingresa la edad de la persona " + (i + 1) + ": ");
+                Console.Write("Introduce el nombre de la persona " + (i + 1) + ": ");
+                String nombre = Console.ReadLine();
+                Console.WriteLine("");
+
+                Personas nuevaPersona = new Personas(nombre, edad);
+                if (edad >= 18)
+                {
+                    mayores.Add(nuevaPersona);
+                }
+                else
+                {
+                    menores.Add(nuevaPersona);
+                }
+            }
+
+            foreach (Personas personas in mayores)
+            {
+                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+            }
+
+            Console.WriteLine("----Todas las personas fueron----");
+            foreach (Personas personas in mayores)
+            {
+                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+            }
+            foreach (Personas personas in menores)
+            {
+                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+            }
+
+            if (mayores.Count > 0)
+            {
+                Console.WriteLine("----Tus personas mayores fueron----");
+                foreach (Personas personas in mayores)
+                {
+                    Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                }
+
+            }
+
+            if (menores.Count > 0)
+            {
+                Console.WriteLine("\n----Tus personas menores fueron----");
+                foreach (Personas personas in menores)
+                {
+                    Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                }
+            }
+        }
+    }
+}
