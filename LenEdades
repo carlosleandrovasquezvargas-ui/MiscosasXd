@@ -5,30 +5,30 @@ namespace Len
 {
     internal class Program
     {
-        public class Personas
+        public class Per
         {
-            public string nombre { get; set; }
-            public int edad { get; set; }
+            public string name { get; set; }
+            public int age { get; set; }
 
-            public Personas(string nombre, int edad)
+            public Per(string nombre, int edad)
             {
-                this.nombre = nombre;
-                this.edad = edad;
+                this.name = name;
+                this.age = age;
             }
         }
         static void Main(string[] args)
         {
-            int cantidadPersona = LeerNumero("Cuantas personas vas a contabilizar: ");
+            int CanP = RN("Cuantas personas vas a contabilizar: ");
 
-            Proceso(cantidadPersona);
+            Proceso(CanP);
 
             Console.WriteLine("\nPresiona cualquier tecla para salir...");
             Console.ReadKey();
         }
 
-        public static int LeerNumero(string error)
+        public static int LeerNum (String error)
         {
-            int resultado;
+            int res;
             while (true)
             {
                 string entrada = Console.ReadLine();
@@ -40,80 +40,80 @@ namespace Len
             }
         }
 
-        public static void Proceso(int cantidadPersona)
+        public static void Proceso(int CanP)
         {
-            if (cantidadPersona == 1)
+            if (CanP == 1)
             {
-                UnaPersona();
+                One();
             }
             else
             {
-                MasPersonas(cantidadPersona);
+                Lot(CanP);
             }
         }
 
-        public static void UnaPersona()
+        public static void One()
         {
-            int edadPersona = LeerNumero("Ingresa la edad de la persona: ");
+            int AgeP = RN("Ingresa la edad de la persona: ");
             Console.Write("Ingresa el nombre de la persona: ");
-            string nombrePersona = Console.ReadLine();
-            if (edadPersona >= 18)
+            string NameP = Console.ReadLine();
+            if (AgeP >= 18)
             {
-                Console.WriteLine($"\nTu persona es:\n{nombrePersona} de {edadPersona} años, es mayor de edad");
+                Console.WriteLine($"\nTu persona es:\n{NameP} de {AgeP} años, es mayor de edad");
             }
             else
             {
-                Console.WriteLine($"\nTu persona es:\n{nombrePersona} de {edadPersona} años, es menor de edad");
+                Console.WriteLine($"\nTu persona es:\n{NameP} de {AgeP} años, es menor de edad");
             }
         }
 
-        public static void MasPersonas(int cantidadPersona)
+        public static void Lot(int CanP)
         {
-            string nombrePersona;
-            List<Personas> mayores = new List<Personas>();
-            List<Personas> menores = new List<Personas>();
+            string NameP;
+            List<Per> Ma = new List<Per>();
+            List<Per> me = new List<Per>();
 
 
 
-            for (int i = 0; i < cantidadPersona; i++)
+            for (int i = 0; i < CanP; i++)
             {
-                int edad = LeerNumero("Ingresa la edad de la persona " + (i + 1) + ": ");
+                int age = RN("Ingresa la edad de la persona " + (i + 1) + ": ");
                 Console.Write("Introduce el nombre de la persona " + (i + 1) + ": ");
-                String nombre = Console.ReadLine();
+                String name = Console.ReadLine();
                 Console.WriteLine("");
 
-                Personas nuevaPersona = new Personas(nombre, edad);
-                if (edad >= 18)
+                Per NewP = new Per(name, age);
+                if (age >= 18)
                 {
-                    mayores.Add(nuevaPersona);
+                    Ma.Add(NewP);
                 }
                 else
                 {
-                    menores.Add(nuevaPersona);
+                    me.Add(NewP);
                 }
             }
 
-            foreach (Personas personas in mayores)
+            foreach (Per Per in Ma)
             {
-                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                Console.WriteLine($"{Per.name} quien tiene {Per.age} años");
             }
 
             Console.WriteLine("----Todas las personas fueron----");
-            foreach (Personas personas in mayores)
+            foreach (Per per in mayores)
             {
-                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                Console.WriteLine($"{personas.name} quien tiene {Per.age} años");
             }
-            foreach (Personas personas in menores)
+            foreach (Per Per in menores)
             {
-                Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                Console.WriteLine($"{Per.name} quien tiene {Per.age} años");
             }
 
             if (mayores.Count > 0)
             {
                 Console.WriteLine("----Tus personas mayores fueron----");
-                foreach (Personas personas in mayores)
+                foreach (Per Per in Ma)
                 {
-                    Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                    Console.WriteLine($"{Per.name} quien tiene {Per.age} años");
                 }
 
             }
@@ -121,9 +121,9 @@ namespace Len
             if (menores.Count > 0)
             {
                 Console.WriteLine("\n----Tus personas menores fueron----");
-                foreach (Personas personas in menores)
+                foreach (Per Per in me)
                 {
-                    Console.WriteLine($"{personas.nombre} quien tiene {personas.edad} años");
+                    Console.WriteLine($"{Per.name} quien tiene {Per.age} años");
                 }
             }
         }
